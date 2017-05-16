@@ -3,4 +3,14 @@
     <string name="login">Sing In</string>
     <string name="user">User :</string>
     <string name="password">Password :</string>
+    <string name="new_register">New Register</string>
+    <string name="name">Name :</string>
+
+    <string name="title_HaveSpace">มีช่องว่าง</string>
+    <string name="massage_HaveSpace">กรุณากรอกช่องว่าง</string>
+    <string name="title_UserFalse">User False</string>
+    <string name="message_UserFalse">No This User in my Database</string>
+    <string name="title_PasswordFalse">Password False</string>
+    <string name="message_PasswordFalse">Please Try Again False</string>
+
 </resources>
