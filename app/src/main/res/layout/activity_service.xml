@@ -15,6 +15,7 @@
         android:padding="@dimen/padding">
 
         <TextView
+            android:id="@+id/txtNameLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Name"
@@ -33,16 +34,17 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/imvBarCode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@mipmap/ic_bar" />
 
                 <TextView
-                    android:text="QR Code"
-                    android:textColor="@color/White"
-                    android:textSize="@dimen/h3"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:text="Bar Code"
+                    android:textColor="@color/White"
+                    android:textSize="@dimen/h3" />
 
 
             </LinearLayout>
@@ -53,17 +55,17 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/imvQrCode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@mipmap/ic_qr" />
 
                 <TextView
-                    android:text="Bar Code"
-                    android:textColor="@color/White"
-                    android:textSize="@dimen/h3"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
+                    android:layout_height="wrap_content"
+                    android:text="QR Code"
+                    android:textColor="@color/White"
+                    android:textSize="@dimen/h3" />
 
 
             </LinearLayout>
@@ -71,6 +73,11 @@
         </LinearLayout>
 
     </RelativeLayout>
+
+    <ListView
+        android:id="@+id/LivProduct"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></ListView>
 
 
 </LinearLayout>
