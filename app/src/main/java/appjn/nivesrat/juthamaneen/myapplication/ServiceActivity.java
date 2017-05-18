@@ -14,12 +14,12 @@ import android.widget.TextView;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class ServiceActivity extends AppCompatActivity {
+public class ServiceActivity extends AppCompatActivity implements View.OnClickListener {
     //Explicit
     private TextView textView;
     private ImageView barImageView, qrImageView;
     private ListView listView;
-    private String nameString;
+    private String nameString, myCodeString;
 
 
     @Override
@@ -36,8 +36,50 @@ public class ServiceActivity extends AppCompatActivity {
         //Create ListView
         createListView();
 
+        //Controller
+        controller();
+
 
     }//Main Method
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            myCodeString = data.getStringExtra("SCAN_RESULT");
+            Log.d("18MayV2", "myCodeString ==> " + myCodeString);
+
+            try {
+                SearchKey searchKey = new SearchKey(this);
+                searchKey.execute(myCodeString);
+                String strJSON = searchKey.get();
+
+                JSONArray jsonArray = new JSONArray(strJSON);
+                JSONObject jsonObject = jsonArray.getJSONObject(0);
+
+                Intent intent = new Intent(ServiceActivity.this, DetailActivity.class);
+                intent.putExtra("Name", jsonObject.getString("Produce"));
+                intent.putExtra("Detail", jsonObject.getString("Detail"));
+                intent.putExtra("Icon", jsonObject.getString("Image"));
+                startActivity(intent);
+
+
+            } catch (Exception e) {
+                Log.d("18MayV2", "e onAc ==> " + e.toString());
+            }
+
+
+
+        }
+
+    }
+
+    private void controller() {
+        barImageView.setOnClickListener(this);
+        qrImageView.setOnClickListener(this);
+    }
 
     private void createListView() {
 
@@ -97,5 +139,30 @@ public class ServiceActivity extends AppCompatActivity {
         barImageView = (ImageView) findViewById(R.id.imvBarCode);
         qrImageView = (ImageView) findViewById(R.id.imvQrCode);
         listView = (ListView) findViewById(R.id.LivProduct);
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        int i = 0;
+        String[] codeString = new String[]{"BAR_CODE_MODE", "QR_CODE_MODE"};
+
+        if (v == barImageView) {
+            i = 0;
+        }
+        if (v == qrImageView) {
+            i = 1;
+        }
+        try {
+
+            Intent intent = new Intent("com.google.zxing.client.android.SCAN");
+            intent.putExtra("SCAN_MODE", codeString[i]);
+            startActivityForResult(intent,0);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+
     }
 }//Main Class
