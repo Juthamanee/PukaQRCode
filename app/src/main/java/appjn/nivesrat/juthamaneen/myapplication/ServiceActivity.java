@@ -26,7 +26,7 @@ public class ServiceActivity extends AppCompatActivity {
         //Show text
         nameString = getIntent().getStringExtra("Login");
         textView.setText(nameString);
-        //
+
 
     }//Main Method
 
